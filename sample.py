@@ -125,10 +125,18 @@ cont_dict = {'Variable': {0: 'AGE',
 
 data_summary = pd.DataFrame(cont_dict)
 
+data_summary = data_summary[~data_summary['Variable'].isin(['FD_FLAG',
+ 'GI_FLAG',
+ 'HEALTH_FLAG',
+ 'LI_FLAG',
+ 'MASS_FLAG',
+ 'MF_FLAG',
+ 'NR_FLAG'])]
+
 df_cont = []
 
 for idx, row in data_summary.iterrows():
-    sample = np.random.normal(loc = row['Mean'], scale = row['Std Dev'],size = N)
+    sample = np.random.gamma(row['Mean'], row['Std Dev'],size = N)
     col_name = row['Variable']
     sample_data = pd.DataFrame({col_name: sample})
     df_cont.append(sample_data)
@@ -183,7 +191,14 @@ cat_variables = {
 'Meghalaya',
 'Mizoram',
 'Andaman and Nicobar'
-]
+],
+'FD_FLAG': ['Y','N'],
+'GI_FLAG': ['Y','N'],
+'HEALTH_FLAG': ['Y','N'],
+'LI_FLAG': ['Y','N'],
+'MASS_FLAG': ['Y','N'],
+'MF_FLAG': ['Y','N'],
+'NR_FLAG': ['Y','N']
 }
 
 prob = {    
@@ -232,7 +247,14 @@ prob = {
 0.00107882,
 0.000526091,
 1.66485E-05
-    ]
+    ],
+'FD_FLAG': [0.5,0.5],
+'GI_FLAG': [0.5,0.5],
+'HEALTH_FLAG': [0.5,0.5],
+'LI_FLAG': [0.5,0.5],
+'MASS_FLAG': [0.5,0.5],
+'MF_FLAG': [0.5,0.5],
+'NR_FLAG': [0.5,0.5]
 }
 
 data_categorical = {}
