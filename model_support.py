@@ -1,3 +1,5 @@
+from scipy import stats
+
 # Chi-Square Test and Cramer's v
 def chi_sq_test(df, x,y):
     cross_tabs = pd.crosstab(df[x], df[y])
